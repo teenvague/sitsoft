@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+  <meta name="theme-color" content="#010000" />
+  <title>Sit Soft — Brand Strategy Session</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main id="app" class="app" aria-live="polite">
+    <section class="card" id="card">
+      <div class="card-inner">
+        <header class="section-title" id="sectionTitle"></header>
+        <div class="question-wrap">
+          <div class="question" id="question"></div>
+        </div>
+        <footer class="progress" id="progress" aria-hidden="true"></footer>
+      </div>
+    </section>
+
+    <button class="tap-zone tap-zone--prev" id="prevZone" aria-label="Previous card"></button>
+    <button class="tap-zone tap-zone--next" id="nextZone" aria-label="Next card"></button>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
