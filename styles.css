@@ -11,6 +11,8 @@
   --font: Arial, Helvetica, sans-serif;
   --type-size: clamp(27px, 7.2vw, 36px);
   /* Section title cards: one size for every section name, however long. */
+  /* Fallback only. fitTitleSize() in script.js overwrites this with the
+     size at which the longest section-name word fills the measure. */
   --type-size-title: clamp(40px, 13vw, 72px);
   --type-leading: 1.08;
   --tracking: 0.025em;
@@ -96,10 +98,10 @@ button{font:inherit}
 .card-inner.is-section .section-title,
 .card-inner.is-section .question{
   font-size:var(--type-size-title);
-}
-
-.card-inner.is-section .question{
-  width:100%;
+  /* Same measure as the question cards, so the left and right margins are
+     identical on every slide in the deck. */
+  width:min(92%,680px);
+  margin-inline:auto;
 }
 
 .card-inner.is-section .question-wrap{

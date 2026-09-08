@@ -87,6 +87,37 @@ function textColor(bg){
   return contrastRatio(l,0) >= contrastRatio(l,1) ? "#010000" : "#F7F7F4";
 }
 
+// The section titles are sized so that the longest single word across every
+// section name exactly fills the measure — "Experiential", as it stands — and
+// every title card then uses that one size. Measured rather than hardcoded so
+// it stays true if a section is renamed, the margin changes, or the face does.
+function fitTitleSize(){
+  const cs = getComputedStyle(question);
+  const tracking = parseFloat(
+    getComputedStyle(document.documentElement).getPropertyValue("--tracking")
+  ) || 0;
+
+  const REF = 100;
+  fitTitleSize.ctx = fitTitleSize.ctx || document.createElement("canvas").getContext("2d");
+  const ctx = fitTitleSize.ctx;
+  ctx.font = `${cs.fontWeight} ${REF}px ${cs.fontFamily}`;
+
+  // Width per 1px of font size: glyphs, plus letter-spacing after each char.
+  let widest = 0;
+  sections.forEach((s) => {
+    s.name.split(/\s+/).forEach((word) => {
+      if(!word) return;
+      const per = ctx.measureText(word).width/REF + word.length*tracking;
+      if(per > widest) widest = per;
+    });
+  });
+
+  const avail = question.clientWidth;
+  if(!avail || !widest) return;
+
+  app.style.setProperty("--type-size-title", `${avail/widest}px`);
+}
+
 function renderProgress(item){
   progress.innerHTML="";
   if(item.type!=="question"){
@@ -190,8 +221,10 @@ document.addEventListener("keydown",(e)=>{
 });
 
 window.addEventListener("resize",()=>{
+  fitTitleSize();
   const item=deck[index];
   if(item.type==="question") renderProgress(item);
 });
 
+fitTitleSize();
 render();
