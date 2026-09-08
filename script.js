@@ -90,13 +90,37 @@ function renderProgress(item){
 
   const count=item.questionCount;
   const styles=getComputedStyle(document.documentElement);
-  const gap=parseFloat(styles.getPropertyValue("--gap")) || 28;
+  const baseGap=parseFloat(styles.getPropertyValue("--gap")) || 28;
   const max=parseFloat(styles.getPropertyValue("--dot-max")) || 44;
   const min=parseFloat(styles.getPropertyValue("--dot-min")) || 18;
-  const available=Math.max(0, progress.clientWidth - gap*(count-1));
-  const dot=Math.max(min, Math.min(max, available/count));
+  const width=progress.clientWidth;
+
+  // Preferred sizing: fixed gap, dots fill what is left. This holds up to
+  // 8 questions and is left exactly as it was.
+  let gap=baseGap;
+  let dot=Math.min(max, (width - gap*(count-1))/count);
+
+  // Past that the dot hits its floor while the gap stays pinned, and the row
+  // overflows — 12 questions wanted 12*18 + 11*28 = 524px inside ~350px.
+  // From here on, scale the gap with the dots so the row always fits.
+  if(dot<min){
+    const ratio=baseGap/max;
+    dot=width/(count + ratio*(count-1));
+    gap=ratio*dot;
+
+    // If even that is too small, hold the readable minimum and squeeze the
+    // gap instead — tight dots read better than tiny ones.
+    if(dot<min){
+      const squeezed=(width - count*min)/(count-1);
+      if(squeezed>=4){ dot=min; gap=squeezed; }
+    }
+
+    dot=Math.max(6, dot);
+    gap=Math.max(2, gap);
+  }
 
   progress.style.setProperty("--dot-size", `${dot}px`);
+  progress.style.gap=`${gap}px`;
 
   for(let i=0;i<count;i++){
     const d=document.createElement("span");
