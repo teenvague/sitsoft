@@ -8,7 +8,6 @@
   --gap:28px;
   --dot-max:44px;
   --dot-min:18px;
-  --transition-ms:190ms;
   --font: Arial, Helvetica, sans-serif;
   --type-size: clamp(27px, 7.2vw, 36px);
   --type-leading: 1.08;
@@ -55,7 +54,6 @@ button{font:inherit}
   box-shadow:none;
   background:var(--bg);
   color:var(--fg);
-  will-change:transform,opacity;
 }
 
 .card-inner{
@@ -143,23 +141,6 @@ button{font:inherit}
 .tap-zone:focus,
 .tap-zone:focus-visible{
   outline:none;
-}
-
-.card.anim-next-out{animation:nextOut var(--transition-ms) cubic-bezier(.22,.61,.36,1) both}
-.card.anim-next-in{animation:nextIn var(--transition-ms) cubic-bezier(.22,.61,.36,1) both}
-.card.anim-prev-out{animation:prevOut var(--transition-ms) cubic-bezier(.22,.61,.36,1) both}
-.card.anim-prev-in{animation:prevIn var(--transition-ms) cubic-bezier(.22,.61,.36,1) both}
-
-@keyframes nextOut{from{transform:translateX(0)}to{transform:translateX(-7%)}}
-@keyframes nextIn{from{transform:translateX(7%)}to{transform:translateX(0)}}
-@keyframes prevOut{from{transform:translateX(0)}to{transform:translateX(7%)}}
-@keyframes prevIn{from{transform:translateX(-7%)}to{transform:translateX(0)}}
-
-@media (prefers-reduced-motion: reduce){
-  .card.anim-next-out,
-  .card.anim-next-in,
-  .card.anim-prev-out,
-  .card.anim-prev-in{animation:none}
 }
 
 @media (min-width:700px){

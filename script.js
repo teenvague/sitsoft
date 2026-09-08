@@ -40,7 +40,6 @@ sections.forEach((section) => {
 });
 
 let index = 0;
-let animating = false;
 
 const app = document.getElementById("app");
 const card = document.getElementById("card");
@@ -161,31 +160,12 @@ function haptic(){
 }
 
 function go(direction){
-  if(animating) return;
-
   const next=index+direction;
   if(next<0 || next>=deck.length) return;
 
   haptic();
-  animating=true;
-
-  const outClass=direction>0 ? "anim-next-out":"anim-prev-out";
-  const inClass=direction>0 ? "anim-next-in":"anim-prev-in";
-
-  card.classList.add(outClass);
-
-  setTimeout(()=>{
-    index=next;
-    render();
-    card.classList.remove(outClass);
-    void card.offsetWidth;
-    card.classList.add(inClass);
-
-    setTimeout(()=>{
-      card.classList.remove(inClass);
-      animating=false;
-    },190);
-  },110);
+  index=next;
+  render();
 }
 
 prevZone.addEventListener("click",()=>go(-1));
