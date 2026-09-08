@@ -14,9 +14,15 @@ const PALETTE = [
 
 const sections = SIT_SOFT_SECTIONS;
 
-const deck = [
-  {type:"landing", section:null, question:"Sit Soft\nBrand Strategy\nSession", bg:"#010000"}
-];
+// The landing card bookends the deck — same card first and last.
+const LANDING = {
+  type:"landing",
+  section:null,
+  question:"Sit Soft\nBrand Strategy\nSession",
+  bg:"#010000"
+};
+
+const deck = [{...LANDING}];
 
 let colorIndex = 0;
 sections.forEach((section) => {
@@ -38,6 +44,8 @@ sections.forEach((section) => {
     });
   });
 });
+
+deck.push({...LANDING});
 
 let index = 0;
 
