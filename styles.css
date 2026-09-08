@@ -10,6 +10,8 @@
   --dot-min:18px;
   --font: Arial, Helvetica, sans-serif;
   --type-size: clamp(27px, 7.2vw, 36px);
+  /* Section title cards: one size for every section name, however long. */
+  --type-size-title: clamp(40px, 13vw, 72px);
   --type-leading: 1.08;
   --tracking: 0.025em;
 }
@@ -86,6 +88,26 @@ button{font:inherit}
   display:grid;
   place-items:center;
   min-height:0;
+}
+
+/* Section title cards: "Sit Soft:" holds the top row, the section name sits
+   on the bottom, both at the same size. The progress row is removed rather
+   than hidden so the name can reach the bottom margin. */
+.card-inner.is-section .section-title,
+.card-inner.is-section .question{
+  font-size:var(--type-size-title);
+}
+
+.card-inner.is-section .question{
+  width:100%;
+}
+
+.card-inner.is-section .question-wrap{
+  place-items:end center;
+}
+
+.card-inner.is-section .progress{
+  display:none;
 }
 
 .question{

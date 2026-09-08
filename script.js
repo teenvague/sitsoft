@@ -23,7 +23,7 @@ sections.forEach((section) => {
   deck.push({
     type:"section",
     section:section.name,
-    question:`Sit Soft:\n${section.name}`,
+    question:section.name,
     bg:PALETTE[colorIndex++ % PALETTE.length]
   });
 
@@ -43,6 +43,7 @@ let index = 0;
 
 const app = document.getElementById("app");
 const card = document.getElementById("card");
+const cardInner = document.querySelector(".card-inner");
 const sectionTitle = document.getElementById("sectionTitle");
 const question = document.getElementById("question");
 const progress = document.getElementById("progress");
@@ -137,7 +138,11 @@ function render(){
 
   document.querySelector('meta[name="theme-color"]').setAttribute("content", item.bg);
 
-  sectionTitle.textContent = item.type==="question" ? `Sit Soft: ${item.section}` : "";
+  cardInner.classList.toggle("is-section", item.type==="section");
+
+  sectionTitle.textContent =
+    item.type==="question" ? `Sit Soft: ${item.section}` :
+    item.type==="section"  ? "Sit Soft:" : "";
   question.textContent = item.question;
 
   requestAnimationFrame(()=>renderProgress(item));
