@@ -37,8 +37,19 @@
       </div>
     </section>
 
-    <button class="tap-zone tap-zone--prev" id="prevZone" aria-label="Previous card"></button>
-    <button class="tap-zone tap-zone--next" id="nextZone" aria-label="Next card"></button>
+    <!-- The tap zones are labels for the switch below, so a real finger tap
+         toggles it natively. A scripted .click() does not reliably fire the
+         iOS haptic; a genuine interaction does. -->
+    <label class="tap-zone tap-zone--prev" id="prevZone" for="hapticSwitch"
+           role="button" aria-label="Previous card"></label>
+    <label class="tap-zone tap-zone--next" id="nextZone" for="hapticSwitch"
+           role="button" aria-label="Next card"></label>
+
+    <!-- iOS 17.4+ fires a system haptic when a checkbox with the switch
+         attribute is toggled. It must stay rendered to work. -->
+    <div class="haptic-host" aria-hidden="true">
+      <input type="checkbox" id="hapticSwitch" switch tabindex="-1" />
+    </div>
   </main>
 
   <script src="data.js"></script>

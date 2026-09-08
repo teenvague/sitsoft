@@ -119,6 +119,7 @@ button{font:inherit}
 
 .tap-zone{
   position:absolute;
+  display:block;
   top:0;
   bottom:0;
   z-index:10;
@@ -134,6 +135,9 @@ button{font:inherit}
 
 .tap-zone--prev{left:0;width:38%}
 .tap-zone--next{right:0;width:62%}
+
+/* Replaces the old button[disabled] state at the ends of the deck. */
+.tap-zone.is-disabled{pointer-events:none}
 
 .tap-zone:focus,
 .tap-zone:focus-visible{
@@ -183,9 +187,9 @@ button{font:inherit}
   position:absolute;
   left:0;
   bottom:0;
-  width:1px;
-  height:1px;
+  width:44px;
+  height:44px;
   opacity:0;
-  overflow:hidden;
+  z-index:-1;
   pointer-events:none;
 }
