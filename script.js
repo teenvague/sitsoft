@@ -127,10 +127,36 @@ function render(){
   nextZone.disabled=index===deck.length-1;
 }
 
+// iOS Safari has never implemented the Vibration API, so navigator.vibrate
+// is undefined there and the guard below always skips. Since iOS 17.4,
+// though, toggling <input type="checkbox" switch> fires a real system
+// haptic, so we keep a hidden one and click it. Android Chrome takes the
+// navigator.vibrate path. Both need a user gesture; go() only runs inside
+// click and keydown handlers, so that holds.
+const hapticSwitch = (() => {
+  const host = document.createElement("div");
+  host.className = "haptic-host";
+  host.setAttribute("aria-hidden", "true");
+
+  const input = document.createElement("input");
+  input.type = "checkbox";
+  input.setAttribute("switch", "");
+  input.id = "hapticSwitch";
+  input.tabIndex = -1;
+
+  const label = document.createElement("label");
+  label.htmlFor = "hapticSwitch";
+
+  host.append(input, label);
+  document.body.appendChild(host);
+  return label;
+})();
+
 function haptic(){
   if(navigator.vibrate){
-    try{ navigator.vibrate(10); }catch(e){}
+    try{ navigator.vibrate(10); return; }catch(e){}
   }
+  try{ hapticSwitch.click(); }catch(e){}
 }
 
 function go(direction){

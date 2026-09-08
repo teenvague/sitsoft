@@ -35,8 +35,12 @@ button{font:inherit}
 .app{
   position:relative;
   width:100%;
+  /* 100vh is the LARGE viewport on iOS — the height the page would have if
+     the toolbar were retracted. Declaring it first as a fallback and letting
+     dvh win keeps the last row above Safari's bottom bar. A min-height:100vh
+     here would override dvh and push the progress row under the toolbar. */
+  height:100vh;
   height:100dvh;
-  min-height:100vh;
   overflow:hidden;
   background:var(--bg);
   color:var(--fg);
@@ -171,4 +175,17 @@ button{font:inherit}
     --gap:18px;
     --type-size: clamp(27px, 7.2vw, 36px);
   }
+}
+
+/* Host for the iOS haptic switch. Must stay rendered — display:none or
+   visibility:hidden stops the toggle from firing the system haptic. */
+.haptic-host{
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:1px;
+  height:1px;
+  opacity:0;
+  overflow:hidden;
+  pointer-events:none;
 }
