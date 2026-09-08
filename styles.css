@@ -2,7 +2,8 @@
 :root{
   --bg:#010000;
   --fg:#F7F7F4;
-  --dot-inactive:rgba(247,247,244,.92);
+  /* One value everywhere. Active state is carried by currentColor. */
+  --dot-inactive:rgba(247,247,244,.32);
   --margin:20px;
   --gap:28px;
   --dot-max:44px;

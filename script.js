@@ -135,10 +135,6 @@ function render(){
 
   app.style.setProperty("--bg", item.bg);
   app.style.setProperty("--fg", fg);
-  app.style.setProperty(
-    "--dot-inactive",
-    fg==="#010000" ? "rgba(247,247,244,.95)" : "rgba(247,247,244,.32)"
-  );
 
   document.querySelector('meta[name="theme-color"]').setAttribute("content", item.bg);
 
