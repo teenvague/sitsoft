@@ -34,7 +34,7 @@ const SIT_SOFT_SECTIONS = [
       "What makes a book belong at Sit Soft? Is there an element of rarity or scarcity? Does the offering change over time? From event to event, or season to season?",
       "Is the base / foundational selection encyclopedic, idiosyncratic, scholarly, literary, visual, obscure, affordable, collectible, used, new?",
       "Where do you want to be the best in the city? Do you want to be known as a place to find a specific thing? I think of Bill, who editorial heads go to find specific issues of old magazines. Who do you want to be that for? Where are you content to be incomplete?",
-      "Will you sell other things in addition to books? I’m excited about merch and objects, and Clown zine!! Will you collect, curate, other things? Maybe this is also an opportunity to partner with local artists?"
+      "Will you sell other things in addition to books? I’m excited about merch and objects, and Clown Zine!! Will you collect, curate, other things? Maybe this is also an opportunity to partner with local artists?"
     ]
   },
   {
